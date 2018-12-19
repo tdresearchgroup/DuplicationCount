@@ -19,7 +19,7 @@ def get_file_duplicates(filename, line_trim = 1, count_trim = 2, duplicates = {}
 			duplicates[cur_line] += 1
 		#if the line is unrecorded, make a new entry
 		else:
-			duplicates[cur_line] = 1
+			duplicates[cur_line] = 0
 
 	for key in duplicates.keys():
 		#remove duplicated line if the number of duplicates is less than count_trim cutoff
@@ -46,7 +46,9 @@ def get_dir_duplicates(directory, line_trim = 1, count_trim = 2, write_to = None
 				for line in lines:
 					cur_line = line.strip()
 					cur_line = cur_line.replace(","," ")
-					#skip line if it only contains whitespace or is shorter than line_trim cutoff
+					#skip line if it only contains whitespace 
+					# or is shorter than line_trim cutoff 
+					# or is an import statement
 					if not re.match('\w', cur_line) or len(cur_line) < line_trim or line.startswith("import "):
 						continue
 
@@ -56,7 +58,7 @@ def get_dir_duplicates(directory, line_trim = 1, count_trim = 2, write_to = None
 						duplicates[cur_line].append(filename)
 					#if the line is unrecorded, make a new entry
 					else:
-						duplicates[cur_line] = [1]
+						duplicates[cur_line] = [0]
 
 	text = ''
 	for line in duplicates.keys():
