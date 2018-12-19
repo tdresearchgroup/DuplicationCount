@@ -15,4 +15,4 @@ Setting this number to 0 will flag every line of code above the line_trim.
 get_file_duplicates only returns a dictionary where the keys are lines of code and the values are the number of duplications for each key.
 
 get_dir_duplicates returns a similar dictionary and has the option of outputing it to a csv file.
-The main distinction between the two dictionaries
+The main distinction between the two dictionaries is that get_dir_duplicates includes all the filenames where the line of code was found.
